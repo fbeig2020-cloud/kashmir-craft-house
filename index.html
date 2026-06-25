@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kashmir Craft House — Authentic Handmade Products</title>
-  <meta name="description" content="Authentic Kashmiri products — pashmina shawls, saffron, dresses, wall rugs and more." />
+  <meta name="description" content="Authentic Kashmiri products — pashmina shawls, embroidery dresses, saffron, kehwa tea and more." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -43,8 +43,7 @@
     .filter-btn.active { background: var(--crimson); color: white; border-color: var(--crimson); }
 
     .section-title { padding: 2rem 2.5rem 0.5rem; font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; color: var(--text-soft); }
-
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 20px; padding: 1.25rem 2.5rem 3rem; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 1.25rem 2.5rem 3rem; }
 
     .product-card { background: var(--warm-white); border-radius: 16px; border: 1px solid var(--border); overflow: hidden; cursor: pointer; box-shadow: var(--card-shadow); transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
     .product-card:hover { transform: translateY(-5px); box-shadow: var(--card-shadow-hover); border-color: rgba(123,35,51,0.35); }
@@ -52,35 +51,46 @@
     .card-img { width: 100%; height: 200px; position: relative; overflow: hidden; background: #F5E6D3; }
     .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
     .product-card:hover .card-img img { transform: scale(1.05); }
-
     .card-no-image { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #FAF0E6 0%, #F0DCC8 100%); gap: 10px; }
-    .card-no-image .upload-icon { font-size: 2.5rem; color: var(--crimson-light); opacity: 0.5; }
-    .card-no-image .upload-text { font-size: 12px; color: var(--text-soft); text-align: center; padding: 0 1rem; }
+    .card-no-image i { font-size: 2.5rem; color: var(--crimson-light); opacity: 0.4; }
+    .card-no-image span { font-size: 12px; color: var(--text-soft); }
 
-    .card-badge { position: absolute; top: 10px; left: 10px; background: var(--crimson); color: white; font-size: 10px; font-weight: 500; padding: 3px 10px; border-radius: 10px; letter-spacing: 0.5px; z-index: 2; }
+    .card-badge { position: absolute; top: 10px; left: 10px; background: var(--crimson); color: white; font-size: 10px; font-weight: 500; padding: 3px 10px; border-radius: 10px; z-index: 2; }
     .card-badge.gold { background: var(--gold); }
 
-    .card-body { padding: 14px 16px 16px; }
+    /* GALLERY thumbnails */
+    .card-thumbs { display: flex; gap: 4px; padding: 6px 8px; background: rgba(0,0,0,0.03); border-top: 1px solid var(--border); overflow-x: auto; }
+    .card-thumb { width: 36px; height: 36px; border-radius: 6px; overflow: hidden; flex-shrink: 0; cursor: pointer; border: 2px solid transparent; transition: border-color 0.15s; }
+    .card-thumb:hover, .card-thumb.active { border-color: var(--crimson); }
+    .card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    .card-body { padding: 12px 16px 16px; }
     .card-name { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 500; color: var(--text-dark); margin-bottom: 4px; line-height: 1.3; }
     .card-origin { font-size: 12px; color: var(--text-soft); margin-bottom: 12px; display: flex; align-items: center; gap: 4px; }
     .card-btn { width: 100%; padding: 9px 12px; background: transparent; border: 1px solid var(--crimson); color: var(--crimson); border-radius: 10px; font-size: 13px; font-family: 'Inter', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.18s; }
     .card-btn:hover { background: var(--crimson); color: white; }
 
+    /* MODAL */
     .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(26,18,8,0.6); z-index: 200; align-items: center; justify-content: center; padding: 1rem; backdrop-filter: blur(3px); }
     .modal-backdrop.open { display: flex; }
-    .modal { background: var(--warm-white); border-radius: 20px; border: 1px solid var(--border); padding: 2.25rem; max-width: 420px; width: 100%; position: relative; box-shadow: 0 24px 64px rgba(26,18,8,0.22); max-height: 90vh; overflow-y: auto; }
-    .modal-close { position: absolute; top: 1.1rem; right: 1.1rem; background: none; border: 1px solid var(--border); color: var(--text-soft); width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
-    .modal-close:hover { background: var(--border); color: var(--text-dark); }
+    .modal { background: var(--warm-white); border-radius: 20px; border: 1px solid var(--border); padding: 0; max-width: 500px; width: 100%; position: relative; box-shadow: 0 24px 64px rgba(26,18,8,0.22); max-height: 92vh; overflow-y: auto; }
+    .modal-close { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.9); border: 1px solid var(--border); color: var(--text-soft); width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: all 0.15s; }
+    .modal-close:hover { background: white; color: var(--text-dark); }
 
-    .modal-img { width: 100%; height: 200px; border-radius: 12px; overflow: hidden; margin-bottom: 1.25rem; background: #F5E6D3; }
-    .modal-img img { width: 100%; height: 100%; object-fit: cover; }
-    .modal-img-fallback { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 4rem; background: linear-gradient(135deg, #FAF0E6 0%, #F0DCC8 100%); }
+    .modal-gallery { position: relative; }
+    .modal-main-img { width: 100%; height: 280px; overflow: hidden; border-radius: 20px 20px 0 0; background: #F5E6D3; }
+    .modal-main-img img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.2s; }
+    .modal-thumbs { display: flex; gap: 8px; padding: 10px 16px; overflow-x: auto; background: rgba(0,0,0,0.02); border-bottom: 1px solid var(--border); }
+    .modal-thumb { width: 56px; height: 56px; border-radius: 8px; overflow: hidden; flex-shrink: 0; cursor: pointer; border: 2px solid transparent; transition: border-color 0.15s; }
+    .modal-thumb:hover, .modal-thumb.active { border-color: var(--crimson); }
+    .modal-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-    .modal-name { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 500; color: var(--text-dark); margin-bottom: 4px; }
-    .modal-origin { font-size: 13px; color: var(--text-soft); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 5px; }
+    .modal-content { padding: 1.5rem; }
+    .modal-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 500; color: var(--text-dark); margin-bottom: 4px; }
+    .modal-origin { font-size: 13px; color: var(--text-soft); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 5px; }
     .email-box { background: #FDF0F2; border: 1px solid rgba(123,35,51,0.2); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 1rem; }
     .email-box-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--crimson-light); margin-bottom: 6px; font-weight: 500; }
-    .email-address { font-size: 15px; font-weight: 500; color: var(--crimson); word-break: break-all; }
+    .email-address { font-size: 15px; font-weight: 500; color: var(--crimson); }
     .modal-hint { font-size: 13px; color: var(--text-soft); line-height: 1.65; margin-bottom: 1.25rem; }
     .modal-actions { display: flex; flex-direction: column; gap: 10px; }
     .btn-primary { padding: 12px; background: var(--crimson); color: white; border: none; border-radius: 12px; font-size: 14px; font-family: 'Inter', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.15s; }
@@ -88,18 +98,12 @@
     .btn-secondary { padding: 11px; background: transparent; color: var(--text-mid); border: 1px solid var(--border); border-radius: 12px; font-size: 14px; font-family: 'Inter', sans-serif; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: all 0.15s; }
     .btn-secondary:hover { border-color: var(--crimson); color: var(--crimson); }
 
-    .upload-notice { background: #FFF8E7; border: 1px solid rgba(201,150,59,0.3); border-radius: 12px; padding: 1rem 1.5rem; margin: 0 2.5rem 1rem; font-size: 13px; color: var(--text-mid); display: flex; align-items: center; gap: 10px; }
-    .upload-notice i { color: var(--gold); font-size: 18px; flex-shrink: 0; }
-
     .trust-strip { display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; padding: 2rem 2.5rem; background: var(--crimson-dark); text-align: center; }
     .trust-item { display: flex; flex-direction: column; align-items: center; gap: 6px; color: rgba(255,255,255,0.7); font-size: 13px; }
     .trust-item i { font-size: 22px; color: var(--gold-light); }
-
     footer { background: var(--text-dark); color: rgba(255,255,255,0.5); text-align: center; padding: 1.75rem 2rem; font-size: 13px; line-height: 1.8; }
     footer a { color: var(--gold-light); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
-
-    .empty-state { grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; color: var(--text-soft); }
 
     @media (max-width: 600px) {
       .topnav { padding: 0.9rem 1.25rem; }
@@ -107,7 +111,6 @@
       .products-grid { padding: 1rem 1.25rem 2.5rem; gap: 14px; }
       .section-title { padding: 1.5rem 1.25rem 0.25rem; }
       .hero { padding: 3rem 1.25rem 3.5rem; }
-      .upload-notice { margin: 0 1.25rem 1rem; }
     }
   </style>
 </head>
@@ -130,35 +133,34 @@
 <div class="filter-bar">
   <span class="filter-label">Browse:</span>
   <button class="filter-btn active" onclick="filterProducts('all', this)">All Products</button>
-  <button class="filter-btn" onclick="filterProducts('textiles', this)">Textiles &amp; Shawls</button>
+  <button class="filter-btn" onclick="filterProducts('shawls', this)">Shawls &amp; Stoles</button>
   <button class="filter-btn" onclick="filterProducts('dresses', this)">Kashmiri Dresses</button>
   <button class="filter-btn" onclick="filterProducts('spices', this)">Spices &amp; Food</button>
   <button class="filter-btn" onclick="filterProducts('decor', this)">Home Decor</button>
 </div>
 
 <p class="section-title" id="section-label">All Products</p>
-
-<div class="upload-notice">
-  <i class="ti ti-info-circle"></i>
-  <span>Product photos coming soon — send us an email to ask for price and photos of any item!</span>
-</div>
-
 <main class="products-grid" id="products-grid"></main>
 
 <div class="modal-backdrop" id="modal-backdrop">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()"><i class="ti ti-x"></i></button>
-    <div class="modal-img" id="modal-img-wrap"></div>
-    <h2 class="modal-name" id="modal-name">Product</h2>
-    <p class="modal-origin"><i class="ti ti-map-pin" style="font-size:13px"></i><span id="modal-origin"></span></p>
-    <div class="email-box">
-      <div class="email-box-label">Contact us for price</div>
-      <div class="email-address">fbeig2020@gmail.com</div>
+    <div class="modal-gallery">
+      <div class="modal-main-img"><img id="modal-main-img" src="" alt="" /></div>
+      <div class="modal-thumbs" id="modal-thumbs"></div>
     </div>
-    <p class="modal-hint" id="modal-hint"></p>
-    <div class="modal-actions">
-      <button class="btn-primary" id="open-mail-btn"><i class="ti ti-send"></i> Send inquiry email</button>
-      <button class="btn-secondary" onclick="copyEmail()"><i class="ti ti-copy"></i> <span id="copy-label">Copy email address</span></button>
+    <div class="modal-content">
+      <h2 class="modal-name" id="modal-name"></h2>
+      <p class="modal-origin"><i class="ti ti-map-pin" style="font-size:13px"></i><span id="modal-origin"></span></p>
+      <div class="email-box">
+        <div class="email-box-label">Contact us for price</div>
+        <div class="email-address">fbeig2020@gmail.com</div>
+      </div>
+      <p class="modal-hint" id="modal-hint"></p>
+      <div class="modal-actions">
+        <button class="btn-primary" id="open-mail-btn"><i class="ti ti-send"></i> Send inquiry email</button>
+        <button class="btn-secondary" onclick="copyEmail()"><i class="ti ti-copy"></i> <span id="copy-label">Copy email address</span></button>
+      </div>
     </div>
   </div>
 </div>
@@ -180,56 +182,71 @@
 <script>
 const CONTACT_EMAIL = 'fbeig2020@gmail.com';
 
-// To add your own photos: replace the empty img:'' with your image filename
-// Example: img:'pashmina-shawl.jpg'  (after uploading your photos to GitHub)
 const products = [
-  // TEXTILES & SHAWLS
-  { id:1,  name:'Pure Pashmina Shawl',      origin:'Handwoven in Srinagar',          category:'textiles', badge:'Bestseller', badgeType:'',     emoji:'🧣', img:'' },
-  { id:2,  name:'Kani Weave Stole',          origin:'Kanihama village looms',         category:'textiles', badge:'Handwoven',  badgeType:'',     emoji:'🪡', img:'' },
-  { id:3,  name:'Kashmiri Stole',            origin:'Artisans of Srinagar',           category:'textiles', badge:null,         badgeType:'',     emoji:'🧣', img:'' },
-  { id:4,  name:'Kashmiri Scarf',            origin:'Handcrafted in Kashmir',         category:'textiles', badge:null,         badgeType:'',     emoji:'🧤', img:'' },
+  // SHAWLS & STOLES
+  { id:1,  name:'Midnight Silver Pashmina Shawl',    origin:'Master weavers, Srinagar',       category:'shawls',  badge:'Bestseller', badgeType:'',
+    imgs:['midnight-silver-pashmina-shawl-1.jpg','midnight-silver-pashmina-shawl-2.jpg','midnight-silver-pashmina-shawl-3.jpg','midnight-silver-pashmina-shawl-4.jpg','midnight-silver-pashmina-shawl-5.jpg','midnight-silver-pashmina-shawl-6.jpg','midnight-silver-pashmina-shawl-7.jpg'] },
+  { id:2,  name:'Royal Blue Tilla Shawl',             origin:'Gold thread artisans, Srinagar', category:'shawls',  badge:'Premium',    badgeType:'gold',
+    imgs:['royal-blue-tilla-shawl-1.jpg','royal-blue-tilla-shawl-2.jpg','royal-blue-tilla-shawl-3.jpg','royal-blue-tilla-shawl-4.jpg','royal-blue-tilla-shawl-5.jpg'] },
+  { id:3,  name:'Golden Harvest Pashmina Shawl',      origin:'Heritage weavers, Kashmir',      category:'shawls',  badge:null,         badgeType:'',
+    imgs:['golden-harvest-pashmina-shawl-1.jpg','golden-harvest-pashmina-shawl-2.jpg','golden-harvest-pashmina-shawl-3.jpg','golden-harvest-pashmina-shawl-4.jpg'] },
+  { id:4,  name:'Moonlit Border Sozni Shawl',         origin:'Sozni embroiderers, Srinagar',   category:'shawls',  badge:'Handwoven',  badgeType:'',
+    imgs:['moonlit-border-sozni-shawl-1.jpg','moonlit-border-sozni-shawl-2.jpg','moonlit-border-sozni-shawl-3.jpg','moonlit-border-sozni-shawl-4.jpg','moonlit-border-sozni-shawl-5.jpg'] },
 
   // KASHMIRI DRESSES
-  { id:5,  name:'Hand Embroidery Dress',     origin:'Master embroiderers, Srinagar',  category:'dresses',  badge:'Handmade',   badgeType:'',     emoji:'👗', img:'' },
-  { id:6,  name:'Kashmiri Pheran',           origin:'Traditional tailors, Kashmir',   category:'dresses',  badge:'Traditional',badgeType:'',     emoji:'👘', img:'' },
-  { id:7,  name:'Tila Wala Pheran',          origin:'Gold thread artisans, Srinagar', category:'dresses',  badge:'Premium',    badgeType:'gold', emoji:'✨', img:'' },
+  { id:5,  name:'Saffron Bloom Embroidery Dress',     origin:'Master embroiderers, Srinagar',  category:'dresses', badge:'Handmade',   badgeType:'',
+    imgs:['saffron-bloom-embroidery-dress-1.jpg','saffron-bloom-embroidery-dress-2.jpg','saffron-bloom-embroidery-dress-3.jpg','saffron-bloom-embroidery-dress-4.jpg'] },
+  { id:6,  name:'Ivory Bloom Embroidery Dress',       origin:'Artisan embroiderers, Kashmir',  category:'dresses', badge:'New',        badgeType:'gold',
+    imgs:['ivory-bloom-embroidery-dress-1.jpg','ivory-bloom-embroidery-dress-2.jpg','ivory-bloom-embroidery-dress-3.jpg','ivory-bloom-embroidery-dress-4.jpg','ivory-bloom-embroidery-dress-5.jpg'] },
+  { id:7,  name:'Lavender Garden Embroidery Dress',   origin:'Traditional tailors, Kashmir',   category:'dresses', badge:null,         badgeType:'',
+    imgs:['lavender-garden-dress-1.jpg','lavender-garden-dress-2.jpg','lavender-garden-dress-3.jpg'] },
+  { id:8,  name:'Turquoise Garden Embroidery Dress',  origin:'Master embroiderers, Srinagar',  category:'dresses', badge:null,         badgeType:'',
+    imgs:['turquoise-garden-embroidery-dress-1.jpg','turquoise-garden-embroidery-dress-2.jpg'] },
+  { id:9,  name:'Sapphire Rose Embroidery Dress',     origin:'Heritage embroiderers, Kashmir', category:'dresses', badge:'Bestseller', badgeType:'',
+    imgs:['sapphire-rose-embroidery-dress-1.jpg','sapphire-rose-embroidery-dress-2.jpg','sapphire-rose-embroidery-dress-3.jpg','sapphire-rose-embroidery-dress-4.jpg','sapphire-rose-embroidery-dress-5.jpg','sapphire-rose-embroidery-dress-6.jpg','sapphire-rose-embroidery-dress-7.jpg','sapphire-rose-embroidery-dress-8.jpg'] },
 
   // SPICES & FOOD
-  { id:8,  name:'Pure Kashmiri Saffron',     origin:'Pampore saffron fields',         category:'spices',   badge:'Premium',    badgeType:'gold', emoji:'🌸', img:'' },
-  { id:9,  name:'Kehwa Tea Blend',           origin:'Valley spice traders',           category:'spices',   badge:null,         badgeType:'',     emoji:'🫖', img:'' },
-  { id:10, name:'Kashmiri Walnuts',          origin:'Kashmir walnut orchards',        category:'spices',   badge:null,         badgeType:'',     emoji:'🌰', img:'' },
-  { id:11, name:'Kashmiri Almonds',          origin:'Kashmir almond orchards',        category:'spices',   badge:null,         badgeType:'',     emoji:'🥜', img:'' },
-  { id:12, name:'Mixed Dry Fruits',          origin:'Kashmir orchards',               category:'spices',   badge:null,         badgeType:'',     emoji:'🍇', img:'' },
-  { id:13, name:'Pure Shilajit',             origin:'Himalayan mountains, Kashmir',   category:'spices',   badge:'Rare',       badgeType:'gold', emoji:'⛰️', img:'' },
-  { id:14, name:'Weight-Loss Herbs',         origin:'Himalayan herb gatherers',       category:'spices',   badge:'Natural',    badgeType:'',     emoji:'🌿', img:'' },
+  { id:10, name:'Pampore Purple Gold Saffron',        origin:'Pampore saffron fields, Kashmir',category:'spices',  badge:'Premium',    badgeType:'gold',
+    imgs:['pampore-purple-gold-saffron.jpg'] },
+  { id:11, name:'Valley Spice Kehwa Tea',             origin:'Valley spice traders, Kashmir',  category:'spices',  badge:null,         badgeType:'',
+    imgs:['valley-spice-kehwa-tea.jpg'] },
+  { id:12, name:'Himalayan Treasure Dry Fruits',      origin:'Kashmir mountain orchards',      category:'spices',  badge:null,         badgeType:'',
+    imgs:['himalayan-treasure-dry-fruits.jpg'] },
+  { id:13, name:'Kashmir Valley Premium Walnuts',     origin:'Kashmir walnut orchards',        category:'spices',  badge:null,         badgeType:'',
+    imgs:['kashmir-valley-premium-walnuts.jpg'] },
+  { id:14, name:'Kashmir Mamra Almonds',              origin:'Kashmir almond orchards',        category:'spices',  badge:'Rare',       badgeType:'gold',
+    imgs:['kashmir-mamra-almonds.jpg'] },
+  { id:15, name:'Pure Himalayan Shilajit Resin',      origin:'Himalayan mountains, Kashmir',   category:'spices',  badge:'Natural',    badgeType:'',
+    imgs:['pure-himalayan-shilajit-resin.jpg'] },
 
   // HOME DECOR
-  { id:15, name:'Kashmiri Wall Rug',         origin:'Master weavers, Kashmir',        category:'decor',    badge:'Handwoven',  badgeType:'',     emoji:'🪞', img:'' },
-  { id:16, name:'Floral Wool Wall Rug',      origin:'Traditional weavers, Kashmir',   category:'decor',    badge:null,         badgeType:'',     emoji:'🌺', img:'' },
-  { id:17, name:'Geometric Wool Wall Rug',   origin:'Heritage weavers, Kashmir',      category:'decor',    badge:'New',        badgeType:'gold', emoji:'🔷', img:'' },
+  { id:16, name:'Kashmiri Hand-Woven Wall Rug',       origin:'Master weavers, Kashmir',        category:'decor',   badge:'Handwoven',  badgeType:'',     imgs:[] },
+  { id:17, name:'Floral Wool Wall Rug',               origin:'Traditional weavers, Kashmir',   category:'decor',   badge:null,         badgeType:'',     imgs:[] },
+  { id:18, name:'Geometric Wool Wall Rug',            origin:'Heritage weavers, Kashmir',      category:'decor',   badge:'New',        badgeType:'gold', imgs:[] },
 ];
 
-const categoryLabels = { all:'All Products', textiles:'Textiles & Shawls', dresses:'Kashmiri Dresses', spices:'Spices & Food', decor:'Home Decor' };
+const categoryLabels = { all:'All Products', shawls:'Shawls & Stoles', dresses:'Kashmiri Dresses', spices:'Spices & Food', decor:'Home Decor' };
 let currentProduct = null;
 
 function renderProducts(list) {
   const grid = document.getElementById('products-grid');
   grid.innerHTML = '';
-  if (!list.length) {
-    grid.innerHTML = `<div class="empty-state">No products in this category yet.</div>`;
-    return;
-  }
   list.forEach(p => {
     const card = document.createElement('article');
     card.className = 'product-card';
-    const imgHtml = p.img
-      ? `<img src="${p.img}" alt="${p.name}" onerror="this.parentElement.innerHTML='<div class=\\'card-no-image\\'><i class=\\'ti ti-camera upload-icon\\'></i><span class=\\'upload-text\\'>Photo coming soon</span></div>'" loading="lazy" />`
-      : `<div class="card-no-image"><i class="ti ti-camera upload-icon"></i><span class="upload-text">Photo coming soon</span></div>`;
+    const mainImg = p.imgs.length ? p.imgs[0] : '';
+    const imgHtml = mainImg
+      ? `<img id="card-img-${p.id}" src="${mainImg}" alt="${p.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-no-image\\'><i class=\\'ti ti-camera\\'></i><span>Photo coming soon</span></div>'" />`
+      : `<div class="card-no-image"><i class="ti ti-camera"></i><span>Photo coming soon</span></div>`;
+    const thumbsHtml = p.imgs.length > 1
+      ? `<div class="card-thumbs">${p.imgs.map((img,i) => `<div class="card-thumb ${i===0?'active':''}" onclick="switchCardImg(${p.id},${i},'${img}',this)"><img src="${img}" loading="lazy" /></div>`).join('')}</div>`
+      : '';
     card.innerHTML = `
       <div class="card-img">
         ${imgHtml}
         ${p.badge ? `<span class="card-badge ${p.badgeType}">${p.badge}</span>` : ''}
       </div>
+      ${thumbsHtml}
       <div class="card-body">
         <div class="card-name">${p.name}</div>
         <div class="card-origin"><i class="ti ti-map-pin" style="font-size:12px"></i>${p.origin}</div>
@@ -239,6 +256,13 @@ function renderProducts(list) {
       </div>`;
     grid.appendChild(card);
   });
+}
+
+function switchCardImg(productId, imgIndex, imgSrc, thumbEl) {
+  const img = document.getElementById(`card-img-${productId}`);
+  if (img) img.src = imgSrc;
+  thumbEl.closest('.card-thumbs').querySelectorAll('.card-thumb').forEach(t => t.classList.remove('active'));
+  thumbEl.classList.add('active');
 }
 
 function filterProducts(cat, btn) {
@@ -251,18 +275,27 @@ function filterProducts(cat, btn) {
 function openModal(id) {
   currentProduct = products.find(p => p.id === id);
   if (!currentProduct) return;
-  const wrap = document.getElementById('modal-img-wrap');
-  wrap.innerHTML = currentProduct.img
-    ? `<img src="${currentProduct.img}" alt="${currentProduct.name}" onerror="this.parentElement.innerHTML='<div class=\\'modal-img-fallback\\'>${currentProduct.emoji}</div>'" />`
-    : `<div class="modal-img-fallback">${currentProduct.emoji}</div>`;
+  const mainImg = document.getElementById('modal-main-img');
+  mainImg.src = currentProduct.imgs.length ? currentProduct.imgs[0] : '';
+  mainImg.alt = currentProduct.name;
+  const thumbsEl = document.getElementById('modal-thumbs');
+  thumbsEl.innerHTML = currentProduct.imgs.length > 1
+    ? currentProduct.imgs.map((img,i) => `<div class="modal-thumb ${i===0?'active':''}" onclick="switchModalImg('${img}',this)"><img src="${img}" loading="lazy" /></div>`).join('')
+    : '';
   document.getElementById('modal-name').textContent = currentProduct.name;
   document.getElementById('modal-origin').textContent = currentProduct.origin;
-  document.getElementById('modal-hint').textContent = `Send us an email about "${currentProduct.name}" and we'll reply within 24 hours with pricing, photos, and availability.`;
+  document.getElementById('modal-hint').textContent = `Send us an email about "${currentProduct.name}" and we'll reply within 24 hours with pricing, availability, and more photos.`;
   const subject = encodeURIComponent(`Price Inquiry: ${currentProduct.name}`);
-  const body = encodeURIComponent(`Hello,\n\nI am interested in:\n${currentProduct.name}\n(${currentProduct.origin})\n\nCould you please share the price, photos, and shipping details?\n\nThank you!`);
+  const body = encodeURIComponent(`Hello,\n\nI am interested in:\n${currentProduct.name}\n(${currentProduct.origin})\n\nCould you please share the price, availability, and shipping details?\n\nThank you!`);
   document.getElementById('open-mail-btn').onclick = () => { window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`; };
   document.getElementById('copy-label').textContent = 'Copy email address';
   document.getElementById('modal-backdrop').classList.add('open');
+}
+
+function switchModalImg(src, thumbEl) {
+  document.getElementById('modal-main-img').src = src;
+  document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+  thumbEl.classList.add('active');
 }
 
 function closeModal() { document.getElementById('modal-backdrop').classList.remove('open'); }
